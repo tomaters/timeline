@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userDAO">
+  <insert id="createAccount" parameterType="userVO">
+    INSERT INTO timeline_user 
+    VALUES (#{username}, #{password}, #{name}, #{email}, SYSDATE, 'default_image.png')
+  </insert>
+  <select id="login" parameterType="userVO" resultType="userVO">
+		SELECT * FROM timeline_user WHERE username=#{username} AND password=#{password}
+  </select>
+  <update id="setProfpicPath" parameterType="userVO">
+		UPDATE timeline_user SET profpic_path =#{profpic_path} WHERE username=#{username}
+  </update>
+  <delete id="deleteAccount" parameterType="userVO">
+		DELETE FROM timeline_user WHERE username=#{username}
+  </delete>
+  <select id="viewAccount" parameterType="String" resultType="userVO">
+		SELECT * FROM timeline_user WHERE username=#{username}
+  </select>
+  <select id="checkUsername" parameterType="String" resultType="boolean">
+		SELECT * FROM timeline_user WHERE username=#{username}
+  </select>
+  <update id="updateAccount" parameterType="userVO">
+		UPDATE timeline_user SET username=#{username}, password=#{password}, name=#{name}, email=#{email} WHERE username=#{username}
+  </update>
+</mapper>

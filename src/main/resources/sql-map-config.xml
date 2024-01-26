@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- setting alias -->
+	<typeAliases>
+		<typeAlias alias="userVO" type="com.jam.timeline.biz.user.UserVO"/>
+		<typeAlias alias="eventVO" type="com.jam.timeline.biz.es.EventVO"/>
+		<typeAlias alias="scheduleVO" type="com.jam.timeline.biz.es.ScheduleVO"/>
+	</typeAliases>
+  
+  <!-- retrieve user-mappings.xml that contains SQL mappings -->
+  <mappers>
+    <mapper resource="mappings/user-mappings.xml"/>
+    <mapper resource="mappings/event-schedule-mappings.xml"/>
+  </mappers>
+</configuration>

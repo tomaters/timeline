@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="eventScheduleDAO">
+  <insert id="createEvent" parameterType="eventVO">
+    INSERT INTO timeline_event (event_id, username, event_date, creation_date, event_title, event_description, event_category) 
+    VALUES (timeline_event_seq.nextval, #{username}, #{event_date}, SYSDATE, #{event_title}, #{event_description}, #{event_category})
+  </insert>
+  <select id="viewEvent" parameterType="eventVO" resultType="eventVO">
+	SELECT * FROM timeline_event WHERE username=#{username} AND event_id=#{event_id}
+  </select>
+  <select id="getEventList" parameterType="eventVO" resultType="eventVO">
+  	SELECT * FROM timeline_event WHERE username=#{username} ORDER BY event_id DESC
+  </select>
+  <select id="getEventListWithCondition" parameterType="eventVO" resultType="eventVO">
+  	SELECT * FROM timeline_event WHERE username=#{username} AND event_category=#{searchKeyword} ORDER BY event_id DESC
+  </select>
+  <update id="updateEvent" parameterType="eventVO">
+  	UPDATE timeline_event SET event_date=#{event_date}, modified_date=SYSDATE, event_title=#{event_title}, event_description=#{event_description},
+  	event_category=#{event_category} WHERE event_id=#{event_id} AND username=#{username}  
+  </update>
+  <delete id="deleteEvent" parameterType="eventVO">
+  	DELETE FROM timeline_event WHERE event_id=#{event_id} AND username=#{username}
+  </delete>
+</mapper>
